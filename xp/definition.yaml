@@ -1,0 +1,32 @@
+apiVersion: apiextensions.crossplane.io/v1
+kind: CompositeResourceDefinition
+metadata:
+  name: xfntests.demo.upbound.io
+spec:
+  group: demo.upbound.io
+  names:
+    kind: XFnTest
+    plural: xfntests
+  claimNames:
+    kind: FnTest
+    plural: fntests
+  versions:
+    - name: v1alpha1
+      served: true
+      referenceable: true
+      schema:
+        openAPIV3Schema:
+          type: object
+          properties:
+            spec:
+              type: object
+              properties:
+                id:
+                  type: string
+                  description: "id/name"
+                region:
+                  type: string
+                  description: Region
+              required:
+                - id
+                - region

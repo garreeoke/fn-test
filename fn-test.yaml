@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: fn-test
+  namespace: default
+spec:
+  containers:
+  - image: us-west2-docker.pkg.dev/crossplane-playground/garreeoke-up/fn-test:v1
+    imagePullPolicy: IfNotPresent
+    name: fn-test
+    command: [ "/bin/sh", "-c", "--" ]
+    args: [ "while true; do sleep 30; done;" ]

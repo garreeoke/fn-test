@@ -1,0 +1,56 @@
+apiVersion: apiextensions.crossplane.io/v1alpha1
+kind: FunctionIO
+config:
+  apiVersion: database.example.org/v1alpha1
+  kind: Config
+  metadata:
+    name: cloudsql
+  spec:
+    version: POSTGRES_9_6
+observed:
+  composite:
+    resource:
+      apiVersion: database.example.org/v1alpha1
+      kind: XS3Bucket
+      metadata:
+        name: torg-bucket
+      spec:
+        id: torg-bucket
+        region: us-west-2
+        ownership: "BucketOwnerPreferred"
+  resources:
+    - name: s3bucket
+      resource:
+        apiVersion: s3.aws.upbound.io/v1beta1
+        kind: Bucket
+        metadata:
+          name: torg-bucket
+        spec:
+          deletionPolicy: Delete
+          forProvider:
+            region: us-west-2
+desired:
+  composite:
+    resource:
+      apiVersion: database.example.org/v1alpha1
+      kind: XS3Bucket
+      metadata:
+        name: torg-bucket
+      spec:
+        id: torg-bucket
+        region: us-west-2
+        ownership: "BucketOwnerPreferred"
+  resources:
+    - name: s3bucket
+      resource:
+        apiVersion: s3.aws.upbound.io/v1beta1
+        kind: Bucket
+        metadata:
+          name: torg-bucket
+        spec:
+          deletionPolicy: Delete
+          forProvider:
+            region: us-west-2
+results:
+  - severity: Normal
+    message: "Successfully composed GCP SQL user"

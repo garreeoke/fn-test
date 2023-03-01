@@ -1,0 +1,8 @@
+apiVersion: demo.upbound.io/v1alpha1
+kind: FnTest
+metadata:
+  name: crossplane-demo-torg-comp-func
+  namespace: default
+spec:
+  id: crossplane-demo-torg-comp-func
+  region: "us-west-2"
